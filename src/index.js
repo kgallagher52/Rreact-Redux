@@ -28,14 +28,15 @@ import * as serviceWorker from './serviceWorker';
 */
 
 // Basic store
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux' // Combine reducers allows the store to know there will be multiple reducers
 
 const initialState = {
     result: '',
-    lastValues: []
+    lastValues: [],
+    user: 'keaton'
 }
 
-const reducer = (state = initialState, action) => {
+const mathReducer = (state = initialState, action) => {
   //1.Determine what action
   switch(action.type){
     case 'ADD':
@@ -44,19 +45,40 @@ const reducer = (state = initialState, action) => {
             result: state.result + action.payload,
             lastValues: [...state.lastValues, action.payload]
         };
-      break;
+    break;
+
     case 'SUBTRACT':
         state = {
             ...state,
             result: state.result - action.payload,
             lastValues: [...state.lastValues, action.payload]
         };
-      break;
+    break;
+
+    default: 
+        return state;
   }
   return state; // New state the application will use
 }
 
-const store = createStore(reducer); // Took away second parameter because the initialState will already be passed
+const userReducer = (state = initialState, action) => {
+    //1.Determine what action
+    switch(action.type){
+      case 'CHANGE_USER':
+          state = {
+              ...state,
+              user: state.user = action.payload,
+          };
+        break;
+        default:
+            return state
+    }
+    return state;
+  }
+
+// Passing in combineReducers({reducers}) allowing me to use multiple reducers
+
+const store = createStore(combineReducers({mathReducer, userReducer})); // Took away second parameter because the initialState will already be passed
 
 console.log("Initial Store:", store.getState())
 
@@ -74,7 +96,11 @@ store.dispatch({
 store.dispatch({
     type:"SUBTRACT",
     payload: 5
-  })
+})
+store.dispatch({
+    type:"CHANGE_USER",
+    payload: 'Siri'
+})
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
