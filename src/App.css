@@ -1,20 +1,21 @@
 .App {
   text-align: center;
-  margin: 0 auto;
+  padding: 12px;
 }
 
 .main-page button {
-  background: #61dafb;
-  color: #282c34;
+  background: #7a5ec6;
+  color: #61dafb;
   padding: 8px 8px;
   height: auto;
   font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   outline: none;
 }
 .main-page button:hover {
-  background: #282c34;
-  color: #61dafb;
+  background: #61dafb;
+  color: #7a5ec6;
 }
 
 .App-logo {

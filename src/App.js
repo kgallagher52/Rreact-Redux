@@ -1,4 +1,5 @@
 import React from 'react';
+import Logo from './assets/react-redux.png';
 //Components
 import MainPage from './MainPage';
 
@@ -6,9 +7,10 @@ import './App.css';
 
 function App() {
   return (
-    <span className="App">
+    <div className="App">
+      <img src={Logo} alt="Main logo"/>
       <MainPage/>
-    </span>
+    </div>
   );
 }
 
