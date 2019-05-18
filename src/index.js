@@ -12,7 +12,7 @@ import * as serviceWorker from './serviceWorker';
   2.Creating a store
     Takes Two Arguments
      1. Argument is the reducer you want to use,
-     2. Argument is the state.
+     2. Argument is the state. (No Longer needed sense we are now using initialState)
 
   3.Creating a reducer
     Takes Two Arguments
@@ -30,20 +30,33 @@ import * as serviceWorker from './serviceWorker';
 // Basic store
 import { createStore } from 'redux'
 
-const reducer = (state, action) => {
+const initialState = {
+    result: '',
+    lastValues: []
+}
+
+const reducer = (state = initialState, action) => {
   //1.Determine what action
   switch(action.type){
     case 'ADD':
-        state = state + action.payload;
+        state = {
+            ...state,
+            result: state.result + action.payload,
+            lastValues: [...state.lastValues, action.payload]
+        };
       break;
     case 'SUBTRACT':
-        state = state - action.payload;
+        state = {
+            ...state,
+            result: state.result - action.payload,
+            lastValues: [...state.lastValues, action.payload]
+        };
       break;
   }
   return state; // New state the application will use
 }
 
-const store = createStore(reducer ,1);
+const store = createStore(reducer); // Took away second parameter because the initialState will already be passed
 
 console.log("Initial Store:", store.getState())
 
@@ -55,12 +68,12 @@ store.subscribe(() => { // Subscribe will check if the store has been updated.
 //Dispatches expect a javascript Object
 store.dispatch({
   type:"ADD",
-  payload: 20
+  payload: 5
 })
 
 store.dispatch({
     type:"SUBTRACT",
-    payload: 10
+    payload: 5
   })
 
 
