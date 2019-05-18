@@ -21,8 +21,10 @@ import * as serviceWorker from './serviceWorker';
 
   4.Creating a action
     Takes Two Arguments
-     1. Argument is the type. ex: type:'ADD'
-     2. Argument is the payload. ex: payload: '1'
+     1. Argument is the type. 
+        ex: type:'ADD'
+     2. Argument is the payload. 
+        ex: payload: '1'
 */
 
 // Basic store
